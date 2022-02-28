@@ -114,9 +114,7 @@ urlpatterns = [
 ]
 ~~~
 ## OUTPUT:
-![](guru.jpeg)
-### Home Page:
-
+![](guru.jpg)
 
 ## Result:
 A website to perform mathematical calculations in server side is created.
