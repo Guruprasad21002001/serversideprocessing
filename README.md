@@ -5,144 +5,116 @@ To design a website to perform mathematical calculations in server side.
 
 ## DESIGN STEPS:
 
-### Step 1:
+Step 1:
+To start the server and open theia IDE.
 
+Step 2:
+Create a folder and Start the django project in that folder.
 
+Step 3:
+Use views.py to execute the coding in serverside.
 
-### Step 2:
+Step 4:
+Mention the path of the website in urls.py.
 
+Step 5:
+Write a HTML and CSS code for mathematical calculator.
 
-
-### Step 3:
-
-
-
-### Step 4:
-
-
-
-### Step 5:
-
-
-
-### Step 6:
-
+Step 6:
 Publish the website in the given URL.
 
-## PROGRAM :
-~~~ html
-urls.py:-
+PROGRAM :
+~~~
+main page.html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>mathwebsite</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src='main.js'></script>
+    <style>
+.container {
+  width: 1080px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 200px;
+  padding-left: 300px;
+}
+.content {
+  display:block;
+  width: 500px;
+  min-height: 300px;
+  font-size: 20px;
+  background-color:white;
+}
+h1{
+    color: blue;
+    text-align: center;
+    padding-top: 25px;
+}
+.formelement{
+    color: blue;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="content">
+    <h1>VOLUME OF A CYLINDER</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="formelement">
+        Length : <input type="text" name="Height" value="{{l}}"></input>Meters<br/>
+        </div>
+        <div class="formelement">
+        Breadth : <input type="text" name="Radius" value="{{b}}"></input>Meters<br/>
+        </div>
+        <div class="formelement">
+        <input type="submit"  value="Calculate Volume"></input><br/>
+        </div>
+        <div class="formelement">
+        Volume : <input type="text" name="volume" value="{{volume}}"></input>Meter<sup>3</sup><br/>
+        </div>
+    </form>
+    </div>
+    </div>
+</body>
+</html>
+views.py
+from django.shortcuts import render
+import numpy as n
 
+def volumecalculation(request):
+    context={}
+    context['volume'] = "0"
+    context['h'] = "0"
+    context['r'] = "0"
+    if request.method == 'POST':
+        l = request.POST.get('Height','0')
+        b = request.POST.get('Radius','0')
+        volume = n.pi*n.sqrt.int(r)*int(h)
+        context['volume'] = volume
+        context['h'] = h
+        context['r'] = r
+    return render(request,'mathapp/volume.html',context)
+urls.py
 from django.contrib import admin
 from django.urls import path
 from mathapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('volofrectangulartank/',views.volumecalculation,name="volofrectangulartank"),
-    path('',views.volumecalculation,name="volofrectangulartankroot")
+    path('volumeofacuboid/',views.volumecalculation,name="volumeofaculinder"),
+    path('',views.volumecalculation,name="volumeofacylinderroot")
 ]
-
-
-views.py:-
-
-from django.shortcuts import render
-
-def volumecalculation(request):
-    context ={}
-    context["volume"]='0'
-    context["h"]='0'
-    context["l"]='0'
-    context["w"]='0'
-    if request.method == 'POST':
-        
-        h=request.POST.get('height','0')
-        l=request.POST.get('length','0')
-        w=request.POST.get('width','0')
-        volume=int(h)*int(l)*int(w)
-        context['volume'] = volume
-        context['l']=l
-        context['h']=h
-        context['w']=w
-    return render(request,"mathapp/area.html",context)
-
-
-html Code:-
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    
-</head>
-<style>
-    *{
-        box-sizing: border-box;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body{
-    background-color: palegreen;
-    color: black;
-    }
-
-    .container{
-    width: 1080px;
-    height: 350px;
-    margin-top: 100px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 25px;
-    border: 10px solid rgb(216, 206, 165);
-    box-shadow: inset 0 0 15px rgb(231, 217, 160);
-    background-color:cornsilk;
-    }
-    h1{
-        color: rgb(0, 0, 0);
-        text-align: center;
-    }
-    .calculate{
-        padding-top: 10px;
-        padding-bottom: 10px;
-        padding-left: 10px;
-        padding-right:10px;
-        text-align: center;
-        font-size: 20px;
-        padding-top: 7px;
-        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    }
-</style>
-<body>
-    <div class="container">
-        <h1>VOLUME OF RECTANGULAR TANK</h1>
-        <form method="POST">
-            {% csrf_token %}
-            <div class="calculate"> 
-                Height:<input type="text" name="height" value={{h}}></input><br/>
-            </div>
-            <div class="calculate">
-                Length:<input type="text" name="length" value={{l}}></input><br/>
-            </div>
-            <div class="calculate">
-                Width:<input type="text" name="width" value={{w}}></input><br/>
-            </div>
-            <div class="calculate">
-                <input type="submit" value="Calculate Volume"></input><br/>
-            </div>
-            <div class="calculate">
-                Volume:<input type="text" name="volume" value={{volume}}></input>
-            </div>
-        </form>
-    </div>
-</body>
-</html>
 ~~~
-
 ## OUTPUT:
-![]()
+![](r)
 ### Home Page:
 
 
