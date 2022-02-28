@@ -114,7 +114,7 @@ urlpatterns = [
 ]
 ~~~
 ## OUTPUT:
-![](r)
+![](guru.jpeg)
 ### Home Page:
 
 
